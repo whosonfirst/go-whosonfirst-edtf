@@ -5,7 +5,7 @@ import (
 	"encoding/csv"
 	"flag"
 	"github.com/tidwall/gjson"
-	"github.com/whosonfirst/go-edtf/parser"
+	"github.com/sfomuseum/go-edtf/parser"
 	"github.com/whosonfirst/go-whosonfirst-index"
 	_ "github.com/whosonfirst/go-whosonfirst-index/fs"
 	"io"

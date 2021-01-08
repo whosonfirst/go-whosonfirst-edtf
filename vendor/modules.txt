@@ -1,16 +1,19 @@
-# github.com/tidwall/gjson v1.6.5
+# github.com/sfomuseum/go-edtf v0.2.0
+github.com/sfomuseum/go-edtf
+github.com/sfomuseum/go-edtf/calendar
+github.com/sfomuseum/go-edtf/common
+github.com/sfomuseum/go-edtf/level0
+github.com/sfomuseum/go-edtf/level1
+github.com/sfomuseum/go-edtf/level2
+github.com/sfomuseum/go-edtf/parser
+github.com/sfomuseum/go-edtf/re
+github.com/sfomuseum/go-edtf/tests
+# github.com/tidwall/gjson v1.6.7
 github.com/tidwall/gjson
 # github.com/tidwall/match v1.0.3
 github.com/tidwall/match
 # github.com/tidwall/pretty v1.0.2
 github.com/tidwall/pretty
-# github.com/whosonfirst/go-edtf v0.0.0-20201224005738-257ca14b3a5d
-github.com/whosonfirst/go-edtf
-github.com/whosonfirst/go-edtf/calendar
-github.com/whosonfirst/go-edtf/level0
-github.com/whosonfirst/go-edtf/level1
-github.com/whosonfirst/go-edtf/level2
-github.com/whosonfirst/go-edtf/parser
 # github.com/whosonfirst/go-whosonfirst-crawl v0.2.1
 github.com/whosonfirst/go-whosonfirst-crawl
 # github.com/whosonfirst/go-whosonfirst-index v0.3.2
