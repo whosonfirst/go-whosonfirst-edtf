@@ -33,6 +33,8 @@ edtf:inception,uuuu
 
 ### update-open-unknown
 
+Update `edtf:` properties with pre-ISO-8601:1-2 "open" or "unknown" values (`open` and `uuuu` respectively).
+
 ```
 $> ./bin/update-unknown-uncertain -h
 Usage of ./bin/update-unknown-uncertain:
@@ -47,7 +49,10 @@ Usage of ./bin/update-unknown-uncertain:
 For example:
 
 ```
-$> ./bin/update-unknown-uncertain /usr/local/data/sfomuseum-data-architecture/
+$> ./bin/update-unknown-uncertain \
+	-writer-uri fs:///usr/local/data/sfomuseum-data-architecture/data \
+	/usr/local/data/sfomuseum-data-architecture/
+	
 2021/02/02 16:26:55 Updated 1376996231 (/usr/local/data/sfomuseum-data-architecture/data/137/699/623/1/1376996231.geojson)
 2021/02/02 16:26:55 Updated 1159162825 (/usr/local/data/sfomuseum-data-architecture/data/115/916/282/5/1159162825.geojson)
 2021/02/02 16:26:55 Updated 1159160869 (/usr/local/data/sfomuseum-data-architecture/data/115/916/086/9/1159160869.geojson)
