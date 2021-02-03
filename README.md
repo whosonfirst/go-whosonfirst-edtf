@@ -31,7 +31,40 @@ edtf:cessation,uuuu
 edtf:inception,uuuu
 ```
 
+### update-open-unknown
+
+```
+$> ./bin/update-unknown-uncertain -h
+Usage of ./bin/update-unknown-uncertain:
+  -exporter-uri string
+    	A valid whosonfirst/go-whosonfirst-export URI. (default "whosonfirst://")
+  -indexer-uri string
+    	A valid whosonfirst/go-whosonfirst-index URI. (default "repo://")
+  -writer-uri string
+    	A valid whosonfirst/go-writer URI. (default "null://")
+```
+
+For example:
+
+```
+$> ./bin/update-unknown-uncertain /usr/local/data/sfomuseum-data-architecture/
+2021/02/02 16:26:55 Updated 1376996231 (/usr/local/data/sfomuseum-data-architecture/data/137/699/623/1/1376996231.geojson)
+2021/02/02 16:26:55 Updated 1159162825 (/usr/local/data/sfomuseum-data-architecture/data/115/916/282/5/1159162825.geojson)
+2021/02/02 16:26:55 Updated 1159160869 (/usr/local/data/sfomuseum-data-architecture/data/115/916/086/9/1159160869.geojson)
+2021/02/02 16:26:55 Updated 1477863281 (/usr/local/data/sfomuseum-data-architecture/data/147/786/328/1/1477863281.geojson)
+2021/02/02 16:26:55 Updated 1159162827 (/usr/local/data/sfomuseum-data-architecture/data/115/916/282/7/1159162827.geojson)
+2021/02/02 16:26:55 Updated 1477863283 (/usr/local/data/sfomuseum-data-architecture/data/147/786/328/3/1477863283.geojson)
+2021/02/02 16:26:55 Updated 1477863285 (/usr/local/data/sfomuseum-data-architecture/data/147/786/328/5/1477863285.geojson)
+2021/02/02 16:26:55 Updated 1477855661 (/usr/local/data/sfomuseum-data-architecture/data/147/785/566/1/1477855661.geojson)
+2021/02/02 16:26:55 Updated 1477855663 (/usr/local/data/sfomuseum-data-architecture/data/147/785/566/3/1477855663.geojson)
+2021/02/02 16:26:55 Updated 1477855821 (/usr/local/data/sfomuseum-data-architecture/data/147/785/582/1/1477855821.geojson)
+2021/02/02 16:26:55 Updated 1477855823 (/usr/local/data/sfomuseum-data-architecture/data/147/785/582/3/1477855823.geojson)
+2021/02/02 16:26:55 Updated 1477855831 (/usr/local/data/sfomuseum-data-architecture/data/147/785/583/1/1477855831.geojson)
+... and so on
+```
+
 ## See also
 
 * https://github.com/whosonfirst/go-edtf
 * https://github.com/whosonfirst/go-whosonfirst-index
+* https://github.com/whosonfirst/go-whosonfirst-export

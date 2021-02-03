@@ -1,13 +1,11 @@
 package writer
 
 import (
-	"bufio"
 	"bytes"
 	"context"
 	"errors"
 	"github.com/tidwall/gjson"
-	"github.com/whosonfirst/go-whosonfirst-export"
-	"github.com/whosonfirst/go-whosonfirst-export/options"
+	"github.com/whosonfirst/go-whosonfirst-export/v2"
 	"github.com/whosonfirst/go-whosonfirst-geojson-v2"
 	"github.com/whosonfirst/go-whosonfirst-uri"
 	go_writer "github.com/whosonfirst/go-writer"
@@ -20,23 +18,18 @@ func WriteFeature(ctx context.Context, wr go_writer.Writer, f geojson.Feature) e
 
 func WriteFeatureBytes(ctx context.Context, wr go_writer.Writer, body []byte) error {
 
-	var buf bytes.Buffer
-	bw := bufio.NewWriter(&buf)
-
-	ex_opts, err := options.NewDefaultOptions()
+	ex, err := export.NewExporter(ctx, "whosonfirst://")
 
 	if err != nil {
 		return err
 	}
-
-	err = export.Export(body, ex_opts, bw)
+	
+	ex_body, err := ex.Export(ctx, body)
 
 	if err != nil {
 		return err
 	}
-
-	ex_body := buf.Bytes()
-
+	
 	id_rsp := gjson.GetBytes(ex_body, "properties.wof:id")
 
 	if !id_rsp.Exists() {

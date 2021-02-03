@@ -132,6 +132,8 @@ github.com/whosonfirst/go-whosonfirst-uri v0.2.0 h1:iODHdyvW+8IXqHZTixZ/9GEZy1dV
 github.com/whosonfirst/go-whosonfirst-uri v0.2.0/go.mod h1:8eaDVcc4v+HHHEDaRbApdmhPwM4/JQllw2PktvZcPVs=
 github.com/whosonfirst/go-whosonfirst-writer v0.0.2 h1:en3UxYrhnr2buzNDmBhefLC8PIA4NYPXhvNUBH9vQto=
 github.com/whosonfirst/go-whosonfirst-writer v0.0.2/go.mod h1:nEh7JFExBFUe/UdJO3YvE6TWmOy+bTVpg3BWikgPsr8=
+github.com/whosonfirst/go-whosonfirst-writer v0.1.0 h1:zwFouhGaKH3ofOVdOF+e6dr0Na6WrxZiLAKiZ8gCduo=
+github.com/whosonfirst/go-whosonfirst-writer v0.1.0/go.mod h1:jvDxfYqj9i0hwfCSHC95ZJcoV393d3zCD8QZ+ohtaQA=
 github.com/whosonfirst/go-writer v0.2.0 h1:3RCym51cVwbhTpAZ7XKoWsXcodbEbKGDWYUpHoXyEOQ=
 github.com/whosonfirst/go-writer v0.2.0/go.mod h1:NGPaud/M3Q6IKLDj2X0PbKKpfWRF9Zneups/BMCG0+0=
 github.com/whosonfirst/walk v0.0.1 h1:t0QrqGwOdPMSeovFZSXfiS0GIGHrRXK3Wb9z5Uhs2bg=
