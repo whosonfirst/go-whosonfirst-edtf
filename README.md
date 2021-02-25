@@ -5,21 +5,22 @@ Go package for working with Extended DateTime Format (EDTF) strings in Who's On 
 ## Tools
 
 ```
-$> make cli
+> make cli
 go build -mod vendor -o bin/find-invalid cmd/find-invalid/main.go
+go build -mod vendor -o bin/update-unknown-uncertain cmd/update-unknown-uncertain/main.go
 ```
 
 ### find-invalid
 
 ```
-> ./bin/find-invalid -h
+$> ./bin/find-invalid -h
 Usage of ./bin/find-invalid:
   -include-key
     	Include edtf: property of relevant Who's On First record in output. (default true)
   -include-path
     	Include path of relevant Who's On First record in output. (default true)
-  -indexer-uri string
-    	A valid whosonfirst/go-whosonfirst-index URI. (default "repo://")
+  -iterator-uri string
+    	A valid whosonfirst/go-whosonfirst-iterate/emitter URI. Supported emitter URI schemes are: directory://,featurecollection://,file://,filelist://,geojsonl://,repo:// (default "repo://")
 ```
 
 For example:
@@ -40,8 +41,8 @@ $> ./bin/update-unknown-uncertain -h
 Usage of ./bin/update-unknown-uncertain:
   -exporter-uri string
     	A valid whosonfirst/go-whosonfirst-export URI. (default "whosonfirst://")
-  -indexer-uri string
-    	A valid whosonfirst/go-whosonfirst-index URI. (default "repo://")
+  -iterator-uri string
+    	A valid whosonfirst/go-whosonfirst-iterate/emitter URI. Supported emitter URI schemes are: directory://,featurecollection://,file://,filelist://,geojsonl://,repo:// (default "repo://")
   -writer-uri string
     	A valid whosonfirst/go-writer URI. (default "null://")
 ```
@@ -50,7 +51,7 @@ For example:
 
 ```
 $> ./bin/update-unknown-uncertain \
-	-writer-uri fs:///usr/local/data/sfomuseum-data-architecture/data \
+	-writer-uri file:///usr/local/data/sfomuseum-data-architecture/data \
 	/usr/local/data/sfomuseum-data-architecture/
 	
 2021/02/02 16:26:55 Updated 1376996231 (/usr/local/data/sfomuseum-data-architecture/data/137/699/623/1/1376996231.geojson)
@@ -71,5 +72,5 @@ $> ./bin/update-unknown-uncertain \
 ## See also
 
 * https://github.com/whosonfirst/go-edtf
-* https://github.com/whosonfirst/go-whosonfirst-index
+* https://github.com/whosonfirst/go-whosonfirst-iterate
 * https://github.com/whosonfirst/go-whosonfirst-export

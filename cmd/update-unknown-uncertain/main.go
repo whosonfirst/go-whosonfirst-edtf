@@ -9,23 +9,28 @@ import (
 	"github.com/tidwall/gjson"
 	"github.com/tidwall/sjson"
 	"github.com/whosonfirst/go-whosonfirst-export/v2"
-	"github.com/whosonfirst/go-whosonfirst-index"
-	_ "github.com/whosonfirst/go-whosonfirst-index/fs"
+	"github.com/whosonfirst/go-whosonfirst-iterate/emitter"
+	"github.com/whosonfirst/go-whosonfirst-iterate/iterator"
 	wof_writer "github.com/whosonfirst/go-whosonfirst-writer"
 	"github.com/whosonfirst/go-writer"
 	"io"
-	"io/ioutil"
 	"log"
 	"strings"
 )
 
 func main() {
 
-	indexer_uri := flag.String("indexer-uri", "repo://", "A valid whosonfirst/go-whosonfirst-index URI.")
+	emitter_schemes := strings.Join(emitter.Schemes(), ",")
+	iterator_desc := fmt.Sprintf("A valid whosonfirst/go-whosonfirst-iterate/emitter URI. Supported emitter URI schemes are: %s", emitter_schemes)
+
+	iterator_uri := flag.String("iterator-uri", "repo://", iterator_desc)
+
 	exporter_uri := flag.String("exporter-uri", "whosonfirst://", "A valid whosonfirst/go-whosonfirst-export URI.")
 	writer_uri := flag.String("writer-uri", "null://", "A valid whosonfirst/go-writer URI.")
 
 	flag.Parse()
+
+	uris := flag.Args()
 
 	ctx := context.Background()
 
@@ -41,15 +46,15 @@ func main() {
 		log.Fatalf("Failed to create writer for '%s', %v", *writer_uri, err)
 	}
 
-	cb := func(ctx context.Context, fh io.Reader, args ...interface{}) error {
+	iter_cb := func(ctx context.Context, fh io.ReadSeeker, args ...interface{}) error {
 
-		path, err := index.PathForContext(ctx)
+		path, err := emitter.PathForContext(ctx)
 
 		if err != nil {
 			return err
 		}
 
-		body, err := ioutil.ReadAll(fh)
+		body, err := io.ReadAll(fh)
 
 		if err != nil {
 			return err
@@ -127,18 +132,13 @@ func main() {
 		return nil
 	}
 
-	i, err := index.NewIndexer(*indexer_uri, cb)
+	iter, err := iterator.NewIterator(ctx, *iterator_uri, iter_cb)
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	ctx, cancel := context.WithCancel(context.Background())
-	defer cancel()
-
-	paths := flag.Args()
-
-	err = i.Index(ctx, paths...)
+	err = iter.IterateURIs(ctx, uris...)
 
 	if err != nil {
 		log.Fatal(err)

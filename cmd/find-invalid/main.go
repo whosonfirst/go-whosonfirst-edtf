@@ -4,12 +4,12 @@ import (
 	"context"
 	"encoding/csv"
 	"flag"
+	"fmt"
 	"github.com/sfomuseum/go-edtf/parser"
 	"github.com/tidwall/gjson"
-	"github.com/whosonfirst/go-whosonfirst-index"
-	_ "github.com/whosonfirst/go-whosonfirst-index/fs"
+	"github.com/whosonfirst/go-whosonfirst-iterate/emitter"
+	"github.com/whosonfirst/go-whosonfirst-iterate/iterator"
 	"io"
-	"io/ioutil"
 	"log"
 	"os"
 	"strings"
@@ -17,12 +17,19 @@ import (
 
 func main() {
 
-	indexer_uri := flag.String("indexer-uri", "repo://", "A valid whosonfirst/go-whosonfirst-index URI.")
+	emitter_schemes := strings.Join(emitter.Schemes(), ",")
+	iterator_desc := fmt.Sprintf("A valid whosonfirst/go-whosonfirst-iterate/emitter URI. Supported emitter URI schemes are: %s", emitter_schemes)
+
+	iterator_uri := flag.String("iterator-uri", "repo://", iterator_desc)
 
 	include_path := flag.Bool("include-path", true, "Include path of relevant Who's On First record in output.")
 	include_key := flag.Bool("include-key", true, "Include edtf: property of relevant Who's On First record in output.")
 
 	flag.Parse()
+
+	uris := flag.Args()
+
+	ctx := context.Background()
 
 	wr := io.MultiWriter(os.Stdout)
 	csv_wr := csv.NewWriter(wr)
@@ -45,15 +52,15 @@ func main() {
 		}
 	}()
 
-	cb := func(ctx context.Context, fh io.Reader, args ...interface{}) error {
+	iter_cb := func(ctx context.Context, fh io.ReadSeeker, args ...interface{}) error {
 
-		path, err := index.PathForContext(ctx)
+		path, err := emitter.PathForContext(ctx)
 
 		if err != nil {
 			return err
 		}
 
-		body, err := ioutil.ReadAll(fh)
+		body, err := io.ReadAll(fh)
 
 		if err != nil {
 			return err
@@ -101,18 +108,13 @@ func main() {
 		return nil
 	}
 
-	i, err := index.NewIndexer(*indexer_uri, cb)
+	iter, err := iterator.NewIterator(ctx, *iterator_uri, iter_cb)
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	ctx, cancel := context.WithCancel(context.Background())
-	defer cancel()
-
-	paths := flag.Args()
-
-	err = i.Index(ctx, paths...)
+	err = iter.IterateURIs(ctx, uris...)
 
 	done_ch <- true
 
