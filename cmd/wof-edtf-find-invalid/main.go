@@ -5,14 +5,15 @@ import (
 	"encoding/csv"
 	"flag"
 	"fmt"
-	"github.com/sfomuseum/go-edtf/parser"
-	"github.com/tidwall/gjson"
-	"github.com/whosonfirst/go-whosonfirst-iterate/emitter"
-	"github.com/whosonfirst/go-whosonfirst-iterate/iterator"
 	"io"
 	"log"
 	"os"
 	"strings"
+
+	"github.com/sfomuseum/go-edtf/parser"
+	"github.com/tidwall/gjson"
+	"github.com/whosonfirst/go-whosonfirst-iterate/emitter"
+	"github.com/whosonfirst/go-whosonfirst-iterate/iterator"
 )
 
 func main() {
