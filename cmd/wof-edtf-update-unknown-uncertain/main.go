@@ -70,7 +70,7 @@ func main() {
 		id_rsp := gjson.GetBytes(body, "properties.wof:id")
 
 		if !id_rsp.Exists() {
-			return errors.New("Missing wof:id property")
+			return errors.New("missing wof:id property")
 		}
 
 		id := id_rsp.Int()
