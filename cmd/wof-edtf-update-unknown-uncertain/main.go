@@ -5,17 +5,18 @@ import (
 	"errors"
 	"flag"
 	"fmt"
+	"io"
+	"log"
+	"strings"
+
 	"github.com/sfomuseum/go-edtf"
 	"github.com/tidwall/gjson"
 	"github.com/tidwall/sjson"
-	"github.com/whosonfirst/go-whosonfirst-export/v2"
+	export "github.com/whosonfirst/go-whosonfirst-export/v2"
 	"github.com/whosonfirst/go-whosonfirst-iterate/emitter"
 	"github.com/whosonfirst/go-whosonfirst-iterate/iterator"
 	wof_writer "github.com/whosonfirst/go-whosonfirst-writer"
 	"github.com/whosonfirst/go-writer"
-	"io"
-	"log"
-	"strings"
 )
 
 func main() {
