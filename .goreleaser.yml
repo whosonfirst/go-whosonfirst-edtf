@@ -4,6 +4,7 @@ before:
 builds:
   - id: wof-edtf-find-invalid
     main: ./cmd/wof-edtf-find-invalid
+    binary: wof-edtf-find-invalid
     env:
       - CGO_ENABLED=0
     goos:
@@ -12,6 +13,7 @@ builds:
       - darwin
   - id: wof-edtf-update-unknown-uncertain
     main: ./cmd/wof-edtf-update-unknown-uncertain
+    binary: wof-edtf-update-unknown-uncertain
     env:
       - CGO_ENABLED=0
     goos:
@@ -19,7 +21,8 @@ builds:
       - windows
       - darwin
 archives:
-  - format: binary
+  -
+    format: binary
     replacements:
       386: i386
       amd64: x86_64
