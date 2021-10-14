@@ -129,6 +129,8 @@ github.com/whosonfirst/go-whosonfirst-uri v1.1.0 h1:kNYOmKSm3u2asUOeq7yXL1Q8gFKk
 github.com/whosonfirst/go-whosonfirst-uri v1.1.0/go.mod h1:8eaDVcc4v+HHHEDaRbApdmhPwM4/JQllw2PktvZcPVs=
 github.com/whosonfirst/go-whosonfirst-writer v0.2.3 h1:6+7l0Xmdru9hMaie/3Fx5TNp8Fv8qXTvDQ7ulTdMgR8=
 github.com/whosonfirst/go-whosonfirst-writer v0.2.3/go.mod h1:zGJ0wshiYAn0FhJSdiKw0rsp+Qfbvjsnqbd35ngIUOE=
+github.com/whosonfirst/go-whosonfirst-writer v0.2.4 h1:ZEqV6vPtDblwWpM5KPgeBBfmcK5EZC193jWxLQwwOmA=
+github.com/whosonfirst/go-whosonfirst-writer v0.2.4/go.mod h1:cTW681YH/uuSY+zV9vnNKKMw3E5XaUNMLLt7SiyVAEA=
 github.com/whosonfirst/go-writer v0.5.0/go.mod h1:TDK4n9E2JPxiGlmSAdi8BQUSlpawEPMF5grpFDjfqRA=
 github.com/whosonfirst/go-writer v0.6.0 h1:rlr8xGaUrSfUC4ogDHKj6F/bEkA1inbw95FEgCHbSAs=
 github.com/whosonfirst/go-writer v0.6.0/go.mod h1:Qj0rZgdoFagSJ1xwhm60KyTgMU4DK5C6q5n8zKpgnj8=

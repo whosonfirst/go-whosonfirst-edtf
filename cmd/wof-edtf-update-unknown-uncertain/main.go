@@ -12,7 +12,6 @@ import (
 	"github.com/sfomuseum/go-edtf"
 	"github.com/tidwall/gjson"
 	"github.com/tidwall/sjson"
-	export "github.com/whosonfirst/go-whosonfirst-export/v2"
 	"github.com/whosonfirst/go-whosonfirst-iterate/v2/emitter"
 	"github.com/whosonfirst/go-whosonfirst-iterate/v2/iterator"
 	wof_writer "github.com/whosonfirst/go-whosonfirst-writer"
@@ -26,7 +25,6 @@ func main() {
 
 	iterator_uri := flag.String("iterator-uri", "repo://", iterator_desc)
 
-	exporter_uri := flag.String("exporter-uri", "whosonfirst://", "A valid whosonfirst/go-whosonfirst-export URI.")
 	writer_uri := flag.String("writer-uri", "null://", "A valid whosonfirst/go-writer URI.")
 
 	flag.Parse()
@@ -34,12 +32,6 @@ func main() {
 	uris := flag.Args()
 
 	ctx := context.Background()
-
-	ex, err := export.NewExporter(ctx, *exporter_uri)
-
-	if err != nil {
-		log.Fatalf("Failed to create exporter for '%s', %v", *exporter_uri, err)
-	}
 
 	wr, err := writer.NewWriter(ctx, *writer_uri)
 
@@ -103,6 +95,7 @@ func main() {
 				changed = true
 
 			default:
+				// https://github.com/whosonfirst/go-whosonfirst-edtf/issues
 				// pass
 			}
 		}
@@ -111,13 +104,7 @@ func main() {
 			return nil
 		}
 
-		new_body, err := ex.Export(ctx, body)
-
-		if err != nil {
-			return err
-		}
-
-		err = wof_writer.WriteFeatureBytes(ctx, wr, new_body)
+		err = wof_writer.WriteFeatureBytes(ctx, wr, body)
 
 		if err != nil {
 			return err

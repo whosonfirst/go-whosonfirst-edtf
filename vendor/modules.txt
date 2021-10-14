@@ -53,7 +53,6 @@ github.com/whosonfirst/go-ioutil
 # github.com/whosonfirst/go-whosonfirst-crawl v0.2.1
 github.com/whosonfirst/go-whosonfirst-crawl
 # github.com/whosonfirst/go-whosonfirst-export/v2 v2.3.5
-## explicit
 github.com/whosonfirst/go-whosonfirst-export/v2
 github.com/whosonfirst/go-whosonfirst-export/v2/properties
 # github.com/whosonfirst/go-whosonfirst-flags v0.4.2
@@ -78,7 +77,7 @@ github.com/whosonfirst/go-whosonfirst-sources/sources
 github.com/whosonfirst/go-whosonfirst-spr/v2
 # github.com/whosonfirst/go-whosonfirst-uri v1.1.0
 github.com/whosonfirst/go-whosonfirst-uri
-# github.com/whosonfirst/go-whosonfirst-writer v0.2.3
+# github.com/whosonfirst/go-whosonfirst-writer v0.2.4
 ## explicit
 github.com/whosonfirst/go-whosonfirst-writer
 # github.com/whosonfirst/go-writer v0.6.0
