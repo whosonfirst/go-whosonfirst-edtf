@@ -77,6 +77,9 @@ github.com/tidwall/gjson v1.9.1/go.mod h1:jydLKE7s8J0+1/5jC4eXcuFlzKizGrCKvLmBVX
 github.com/tidwall/gjson v1.9.3/go.mod h1:/wbyibRr2FHMks5tjHJ5F8dMZh3AcwJEMf5vlfC0lxk=
 github.com/tidwall/gjson v1.9.4 h1:oNis7dk9Rs3dKJNNigXZT1MTOiJeBtpurn+IpCB75MY=
 github.com/tidwall/gjson v1.9.4/go.mod h1:/wbyibRr2FHMks5tjHJ5F8dMZh3AcwJEMf5vlfC0lxk=
+github.com/tidwall/gjson v1.10.2/go.mod h1:/wbyibRr2FHMks5tjHJ5F8dMZh3AcwJEMf5vlfC0lxk=
+github.com/tidwall/gjson v1.12.1 h1:ikuZsLdhr8Ws0IdROXUS1Gi4v9Z4pGqpX/CvJkxvfpo=
+github.com/tidwall/gjson v1.12.1/go.mod h1:/wbyibRr2FHMks5tjHJ5F8dMZh3AcwJEMf5vlfC0lxk=
 github.com/tidwall/match v1.0.1/go.mod h1:LujAq0jyVjBy028G1WhWfIzbpQfMO8bBZ6Tyb0+pL9E=
 github.com/tidwall/match v1.0.3 h1:FQUVvBImDutD8wJLN6c5eMzWtjgONK9MwIBCOrUJKeE=
 github.com/tidwall/match v1.0.3/go.mod h1:eRSPERbgtNPcGhD8UCthc6PmLEQXEWd3PRB5JTxsfmM=
@@ -91,6 +94,8 @@ github.com/tidwall/pretty v1.2.0/go.mod h1:ITEVvHYasfjBbM0u2Pg8T2nJnzm8xPwvNhhso
 github.com/tidwall/sjson v1.1.7/go.mod h1:w/yG+ezBeTdUxiKs5NcPicO9diP38nk96QBAbIIGeFs=
 github.com/tidwall/sjson v1.2.2 h1:H1Llj/C9G+BoUN2DsybLHjWvr9dx4Uazavf0sXQ+rOs=
 github.com/tidwall/sjson v1.2.2/go.mod h1:jmW2RZpbKuExPFUHeFSBMiovT9ZyOziEHDRkbsdp0B0=
+github.com/tidwall/sjson v1.2.3 h1:5+deguEhHSEjmuICXZ21uSSsXotWMA0orU783+Z7Cp8=
+github.com/tidwall/sjson v1.2.3/go.mod h1:5WdjKx3AQMvCJ4RG6/2UYT7dLrGvJUV1x4jdTAyGvZs=
 github.com/whosonfirst/algnhsa v0.1.0/go.mod h1:swLBXxaVTv3s6dJLhekdQCuCTshUew+xHjptRC21RG0=
 github.com/whosonfirst/go-ioutil v1.0.0 h1:sYpgJx7Wsp76e7PFGa8KKQBvWQW3+HMCWSJbKdD5m14=
 github.com/whosonfirst/go-ioutil v1.0.0/go.mod h1:2dS1vWdAIkiHDvDF8fYyjv6k2NISmwaIjJJeEDBEdvg=
@@ -134,6 +139,8 @@ github.com/whosonfirst/go-whosonfirst-writer v0.2.4/go.mod h1:cTW681YH/uuSY+zV9v
 github.com/whosonfirst/go-writer v0.5.0/go.mod h1:TDK4n9E2JPxiGlmSAdi8BQUSlpawEPMF5grpFDjfqRA=
 github.com/whosonfirst/go-writer v0.6.0 h1:rlr8xGaUrSfUC4ogDHKj6F/bEkA1inbw95FEgCHbSAs=
 github.com/whosonfirst/go-writer v0.6.0/go.mod h1:Qj0rZgdoFagSJ1xwhm60KyTgMU4DK5C6q5n8zKpgnj8=
+github.com/whosonfirst/go-writer v0.7.0 h1:k0lqYFafxRfYDoUc5TQTanRrpHI8YMx2S5Tv0ISgjbY=
+github.com/whosonfirst/go-writer v0.7.0/go.mod h1:Qj0rZgdoFagSJ1xwhm60KyTgMU4DK5C6q5n8zKpgnj8=
 github.com/whosonfirst/walk v0.0.1 h1:t0QrqGwOdPMSeovFZSXfiS0GIGHrRXK3Wb9z5Uhs2bg=
 github.com/whosonfirst/walk v0.0.1/go.mod h1:1KtP/VeooSlFOI61p+THc/C16Ra8Z5MjpjI0tsd3c1M=
 github.com/whosonfirst/warning v0.1.1/go.mod h1:/unEMzhB9YaMeEwTJpzLN3kM5LiSxdJhKEsf/OQhn6s=
