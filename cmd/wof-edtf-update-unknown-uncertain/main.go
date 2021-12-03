@@ -2,20 +2,18 @@ package main
 
 import (
 	"context"
-	"errors"
 	"flag"
 	"fmt"
 	"io"
 	"log"
-	"strings"
-
-	"github.com/sfomuseum/go-edtf"
-	"github.com/tidwall/gjson"
-	"github.com/tidwall/sjson"
+	"github.com/whosonfirst/go-whosonfirst-edtf"	
 	"github.com/whosonfirst/go-whosonfirst-iterate/v2/emitter"
 	"github.com/whosonfirst/go-whosonfirst-iterate/v2/iterator"
 	wof_writer "github.com/whosonfirst/go-whosonfirst-writer"
 	"github.com/whosonfirst/go-writer"
+	"strings"
+	"errors"
+	"github.com/tidwall/gjson"	
 )
 
 func main() {
@@ -47,12 +45,6 @@ func main() {
 			return err
 		}
 
-		props := gjson.GetBytes(body, "properties")
-
-		if !props.Exists() {
-			return nil
-		}
-
 		id_rsp := gjson.GetBytes(body, "properties.wof:id")
 
 		if !id_rsp.Exists() {
@@ -61,45 +53,12 @@ func main() {
 
 		id := id_rsp.Int()
 
-		changed := false
+		changed, body, err := edtf.UpdateBytes(body)
 
-		for k, v := range props.Map() {
-
-			if !strings.HasPrefix(k, "edtf:") {
-				continue
-			}
-
-			path := fmt.Sprintf("properties.%s", k)
-
-			var err error
-
-			switch v.String() {
-			case "open":
-
-				body, err = sjson.SetBytes(body, path, edtf.OPEN)
-
-				if err != nil {
-					return err
-				}
-
-				changed = true
-
-			case "uuuu":
-
-				body, err = sjson.SetBytes(body, path, edtf.UNKNOWN)
-
-				if err != nil {
-					return err
-				}
-
-				changed = true
-
-			default:
-				// https://github.com/whosonfirst/go-whosonfirst-edtf/issues
-				// pass
-			}
+		if err != nil {
+			return fmt.Errorf("Failed to apply EDTF updates to %d, %w", id, err)
 		}
-
+		
 		if !changed {
 			return nil
 		}
