@@ -2,31 +2,27 @@ package main
 
 import (
 	"context"
-	"errors"
 	"flag"
 	"fmt"
 	"io"
 	"log"
-	"strings"
-
-	"github.com/sfomuseum/go-edtf"
-	"github.com/tidwall/gjson"
-	"github.com/tidwall/sjson"
-	export "github.com/whosonfirst/go-whosonfirst-export/v2"
-	"github.com/whosonfirst/go-whosonfirst-iterate/emitter"
-	"github.com/whosonfirst/go-whosonfirst-iterate/iterator"
+	"github.com/whosonfirst/go-whosonfirst-edtf"	
+	"github.com/whosonfirst/go-whosonfirst-iterate/v2/emitter"
+	"github.com/whosonfirst/go-whosonfirst-iterate/v2/iterator"
 	wof_writer "github.com/whosonfirst/go-whosonfirst-writer"
 	"github.com/whosonfirst/go-writer"
+	"strings"
+	"errors"
+	"github.com/tidwall/gjson"	
 )
 
 func main() {
 
 	emitter_schemes := strings.Join(emitter.Schemes(), ",")
-	iterator_desc := fmt.Sprintf("A valid whosonfirst/go-whosonfirst-iterate/emitter URI. Supported emitter URI schemes are: %s", emitter_schemes)
+	iterator_desc := fmt.Sprintf("A valid whosonfirst/go-whosonfirst-iterate/v2 URI. Supported emitter URI schemes are: %s", emitter_schemes)
 
 	iterator_uri := flag.String("iterator-uri", "repo://", iterator_desc)
 
-	exporter_uri := flag.String("exporter-uri", "whosonfirst://", "A valid whosonfirst/go-whosonfirst-export URI.")
 	writer_uri := flag.String("writer-uri", "null://", "A valid whosonfirst/go-writer URI.")
 
 	flag.Parse()
@@ -35,36 +31,18 @@ func main() {
 
 	ctx := context.Background()
 
-	ex, err := export.NewExporter(ctx, *exporter_uri)
-
-	if err != nil {
-		log.Fatalf("Failed to create exporter for '%s', %v", *exporter_uri, err)
-	}
-
 	wr, err := writer.NewWriter(ctx, *writer_uri)
 
 	if err != nil {
 		log.Fatalf("Failed to create writer for '%s', %v", *writer_uri, err)
 	}
 
-	iter_cb := func(ctx context.Context, fh io.ReadSeeker, args ...interface{}) error {
-
-		path, err := emitter.PathForContext(ctx)
-
-		if err != nil {
-			return err
-		}
+	iter_cb := func(ctx context.Context, path string, fh io.ReadSeeker, args ...interface{}) error {
 
 		body, err := io.ReadAll(fh)
 
 		if err != nil {
 			return err
-		}
-
-		props := gjson.GetBytes(body, "properties")
-
-		if !props.Exists() {
-			return nil
 		}
 
 		id_rsp := gjson.GetBytes(body, "properties.wof:id")
@@ -75,55 +53,17 @@ func main() {
 
 		id := id_rsp.Int()
 
-		changed := false
+		changed, body, err := edtf.UpdateBytes(body)
 
-		for k, v := range props.Map() {
-
-			if !strings.HasPrefix(k, "edtf:") {
-				continue
-			}
-
-			path := fmt.Sprintf("properties.%s", k)
-
-			var err error
-
-			switch v.String() {
-			case "open":
-
-				body, err = sjson.SetBytes(body, path, edtf.OPEN)
-
-				if err != nil {
-					return err
-				}
-
-				changed = true
-
-			case "uuuu":
-
-				body, err = sjson.SetBytes(body, path, edtf.UNKNOWN)
-
-				if err != nil {
-					return err
-				}
-
-				changed = true
-
-			default:
-				// pass
-			}
+		if err != nil {
+			return fmt.Errorf("Failed to apply EDTF updates to %d, %w", id, err)
 		}
-
+		
 		if !changed {
 			return nil
 		}
 
-		new_body, err := ex.Export(ctx, body)
-
-		if err != nil {
-			return err
-		}
-
-		err = wof_writer.WriteFeatureBytes(ctx, wr, new_body)
+		err = wof_writer.WriteFeatureBytes(ctx, wr, body)
 
 		if err != nil {
 			return err

@@ -12,14 +12,14 @@ import (
 
 	"github.com/sfomuseum/go-edtf/parser"
 	"github.com/tidwall/gjson"
-	"github.com/whosonfirst/go-whosonfirst-iterate/emitter"
-	"github.com/whosonfirst/go-whosonfirst-iterate/iterator"
+	"github.com/whosonfirst/go-whosonfirst-iterate/v2/emitter"
+	"github.com/whosonfirst/go-whosonfirst-iterate/v2/iterator"
 )
 
 func main() {
 
 	emitter_schemes := strings.Join(emitter.Schemes(), ",")
-	iterator_desc := fmt.Sprintf("A valid whosonfirst/go-whosonfirst-iterate/emitter URI. Supported emitter URI schemes are: %s", emitter_schemes)
+	iterator_desc := fmt.Sprintf("A valid whosonfirst/go-whosonfirst-iterate/v2 URI. Supported emitter URI schemes are: %s", emitter_schemes)
 
 	iterator_uri := flag.String("iterator-uri", "repo://", iterator_desc)
 
@@ -53,13 +53,7 @@ func main() {
 		}
 	}()
 
-	iter_cb := func(ctx context.Context, fh io.ReadSeeker, args ...interface{}) error {
-
-		path, err := emitter.PathForContext(ctx)
-
-		if err != nil {
-			return err
-		}
+	iter_cb := func(ctx context.Context, path string, fh io.ReadSeeker, args ...interface{}) error {
 
 		body, err := io.ReadAll(fh)
 
