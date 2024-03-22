@@ -1,7 +1,7 @@
 package uri
 
 import (
-	"errors"
+	"fmt"
 	"github.com/whosonfirst/go-whosonfirst-sources"
 	_ "log"
 	"net/url"
@@ -36,7 +36,7 @@ func (a *AltGeom) String() (string, error) {
 	source := a.Source
 
 	if a.Strict && source == "" {
-		return "", errors.New("Missing source argument for alternate geometry")
+		return "", fmt.Errorf("Missing source argument for alternate geometry")
 	}
 
 	if source == "" {
@@ -45,7 +45,7 @@ func (a *AltGeom) String() (string, error) {
 	}
 
 	if a.Strict && !sources.IsValidSource(source) {
-		return "", errors.New("Invalid or unknown source argument for alternate geometry")
+		return "", fmt.Errorf("Invalid or unknown source argument for alternate geometry")
 	}
 
 	parts := []string{
@@ -93,6 +93,32 @@ func NewAlternateURIArgs(source string, function string, extras ...string) *URIA
 	}
 
 	return &u
+}
+
+// Return a `URIArgs` struct representing an alternate geometry derive from 'label' (which is expected to
+// be the value of a valid "src:alt_label" or "src:geom_alt" property.
+func NewAlternateURIArgsFromAltLabel(label string) (*URIArgs, error) {
+
+	parts := strings.Split(label, "-")
+
+	if len(parts) < 1 {
+		return nil, fmt.Errorf("Invalid alt label")
+	}
+
+	source := parts[0]
+	function := ""
+	extras := make([]string, 0)
+
+	if len(parts) > 1 {
+		function = parts[1]
+	}
+
+	if len(parts) > 2 {
+		extras = parts[2:]
+	}
+
+	uri_args := NewAlternateURIArgs(source, function, extras...)
+	return uri_args, nil
 }
 
 // See also: https://github.com/whosonfirst/whosonfirst-cookbook/blob/master/how_to/creating_alt_geometries.md

@@ -2,18 +2,19 @@ package main
 
 import (
 	"context"
+	"errors"
 	"flag"
 	"fmt"
 	"io"
 	"log"
-	"github.com/whosonfirst/go-whosonfirst-edtf"	
+	"strings"
+
+	"github.com/tidwall/gjson"
+	"github.com/whosonfirst/go-whosonfirst-edtf"
 	"github.com/whosonfirst/go-whosonfirst-iterate/v2/emitter"
 	"github.com/whosonfirst/go-whosonfirst-iterate/v2/iterator"
-	wof_writer "github.com/whosonfirst/go-whosonfirst-writer"
-	"github.com/whosonfirst/go-writer"
-	"strings"
-	"errors"
-	"github.com/tidwall/gjson"	
+	wof_writer "github.com/whosonfirst/go-whosonfirst-writer/v3"
+	"github.com/whosonfirst/go-writer/v3"
 )
 
 func main() {
@@ -58,12 +59,12 @@ func main() {
 		if err != nil {
 			return fmt.Errorf("Failed to apply EDTF updates to %d, %w", id, err)
 		}
-		
+
 		if !changed {
 			return nil
 		}
 
-		err = wof_writer.WriteFeatureBytes(ctx, wr, body)
+		_, err = wof_writer.WriteBytes(ctx, wr, body)
 
 		if err != nil {
 			return err

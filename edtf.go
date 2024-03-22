@@ -2,10 +2,11 @@ package edtf
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/sfomuseum/go-edtf"
 	"github.com/tidwall/gjson"
-	"github.com/tidwall/sjson"
-	"strings"
+	"github.com/tidwall/sjson"	
 )
 
 func UpdateBytes(body []byte) (bool, []byte, error) {
